@@ -1,0 +1,19 @@
+<div class="well flex">
+    <div>
+      <h3>{{weatherData.name}} ({{zipCode}})</h3>
+      <h4>Current conditions: {{weatherData.weather[0].main}}</h4>
+      <h4>Temperatures today:</h4>
+      <p>
+        Current {{weatherData.main.temp}}
+        - Max {{weatherData.main.temp_max}}
+        - Min {{weatherData.main.temp_min}}
+      </p>
+      <p>
+        <a href="#" (click)="callOpenFullForecast()">Show 5-day forecast for {{weatherData.name}} </a>
+      </p>
+    </div>
+    <div>
+      <span (click)="callClose()" class="close">×</span>
+      <img [src]="weatherIconSrc">
+    </div>
+ </div>

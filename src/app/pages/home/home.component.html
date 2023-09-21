@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <form [formGroup]="weatherForm" (ngSubmit)="onSubmit()">
+        <div class="well">
+
+            <div class="error" *ngIf="error">
+                <span style="color: red; font-weight: bold;">
+                    ERROR: {{error}}
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <input id="zipcode" formControlName="zipcode" class="form-control" placeholder="Zipcode" type="text">
+                    <span style="margin-left: 7px; color: red; font-weight: bold;" *ngIf="submitted && weatherForm.get('zipcode').hasError('required')">
+                        This field is required.
+                    </span>
+                </div>
+                <div class="col-6">
+                    <select class="form-control" id="countrycode" formControlName="countrycode">
+                        <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" style="margin-top: 12px;" class="btn btn-primary" id="addLocationBtn">
+            Get Weather
+            </button>
+        </div>
+    </form>
+
+    <app-weather-details *ngIf="weatherData" (close)="closeWeather()" (openFullForecast)="openFullForecast()" (closeRequest)="closeWeather()" [weatherData]="weatherData" [zipCode]="selectedCode"></app-weather-details>
+    <app-weather-details-multiple *ngIf="weatherDataFull" (close)="closeFullWeather()" [weatherDataFull]="weatherDataFull" [zipCode]="selectedCode"></app-weather-details-multiple>
+<div>
